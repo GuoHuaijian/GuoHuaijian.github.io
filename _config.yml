@@ -14,8 +14,8 @@ description: 有道无术,术尚可求 有术无道,止于道
 #
 
 # 你的博客logo图片URL，建议尺寸不超过300px × 300px
-avatar: #https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1569218957617&di=30efe3c57c2539a9ede4ecf9fd719c62&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F908fa0ec08fa513db777cf78376d55fbb3fbd9b3.jpg
-https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/logo.png
+avatar: https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1569218957617&di=30efe3c57c2539a9ede4ecf9fd719c62&imgtype=0&src=http%3A%2F%2Fb.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F908fa0ec08fa513db777cf78376d55fbb3fbd9b3.jpg
+#https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/logo.png
 
 # 你的favicon（出现在浏览器tab上）图片URL，建议使用较小(64px × 64px)的图片
 favicon: https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/favicon.png
