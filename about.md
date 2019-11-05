@@ -15,4 +15,4 @@ permalink: /about/
 
 年轻就该经历酸甜苦辣，年轻就该流泪呐喊，是我们的就该去追逐，不是我们的我们依然能够去争取，因为我们还年轻，趁青春还在，抓住青春的尾巴，在人生的战场上留下一笔属于自己的辉煌战绩!
 
-![代码](http://pyy4qfs0s.bkt.clouddn.com/timg%20%281%29.jpg)
+![代码](http://image.guohuaijian.com/timg%20%281%29.jpg)
