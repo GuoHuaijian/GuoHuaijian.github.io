@@ -48,12 +48,15 @@ permalink: /tags/
 </div>
 
 <style>
+  /* 全局容器样式 */
   .tags-container {
     padding: 1rem;
     max-width: 800px;
     margin: 0 auto;
+    font-family: "Arial", sans-serif;
   }
 
+  /* 标签列表样式 */
   .tag-list {
     margin-bottom: 2rem;
   }
@@ -74,27 +77,29 @@ permalink: /tags/
   .tag-labels a {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background-color: #0078d4;
-    color: white;
+    background-color: #20c997; /* Open Color green */
+    color: #fff; /* White text for contrast */
     border-radius: 20px;
     text-decoration: none;
     font-size: 0.9rem;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
   }
 
   .tag-labels a:hover {
-    background-color: #005bb5;
+    background-color: #12b886; /* Darker green */
+    transform: scale(1.05);
   }
 
+  /* 标签文章列表样式 */
   .tag-posts {
     margin-top: 2rem;
   }
 
   .tag-title {
     margin-top: 2rem;
-    color: #333;
+    color: #000; /* Black for title */
     font-size: 1.5rem;
-    border-bottom: 2px solid #ddd;
+    border-bottom: 2px solid #868e96; /* Open Color gray-5 */
     padding-bottom: 0.5rem;
   }
 
@@ -108,19 +113,21 @@ permalink: /tags/
   }
 
   .tag-post-list a {
-    color: #0078d4;
+    color: #20c997; /* Open Color green */
     text-decoration: none;
     font-weight: bold;
     font-size: 1rem;
+    transition: color 0.2s;
   }
 
   .tag-post-list a:hover {
+    color: #12b886; /* Darker green */
     text-decoration: underline;
   }
 
   .post-date {
     font-size: 0.85rem;
-    color: #999;
+    color: #868e96; /* Open Color gray-5 */
     margin-left: 0.5rem;
   }
 </style>
