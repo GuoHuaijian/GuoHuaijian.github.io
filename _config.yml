@@ -70,7 +70,7 @@ gitalk:
   clientID: 23c2dc3bdd26fb236b7a
   clientSecret: 739d15b447a4dadcf6a3366859fbad9a560673d3
   repo: GuoHuaijian.github.io 
-  owner: 5645599079@qq.com
+  owner: GuoHuaijian
 
 # 输入Google Analytics web tracking code
 #google_analytics:
