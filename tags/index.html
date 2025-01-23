@@ -5,129 +5,51 @@ permalink: /tags/
 ---
 
 {% if site.posts.size == 0 %}
-  <h2>No posts found</h2>
+<h2>No post found</h2>
 {% endif %}
 
-<div class="tags-container">
-  <!-- 标签列表 -->
-  <div class="tag-list">
-    <ul class="tag-labels">
-      {% for tag in site.tags %}
-      <li>
-        <a href="#{{ tag[0] }}">
-          <span class="tag-name">{{ tag[0] }}</span>
-          <span class="tag-count">({{ tag[1] | size }})</span>
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
-
-  <!-- 按标签展示文章列表 -->
-  <div class="tag-posts">
+<div class="tags">
+  <ul class="label">
     {% for tag in site.tags %}
-      <h2 id="{{ tag[0] }}" class="tag-title">{{ tag[0] }}</h2>
-      <ul class="tag-post-list">
-        {% for post in tag[1] %}
-          {% if post.title != null %}
-          <li>
-            {% if post.link %}
-              <a href="{{ post.link }}">
-            {% else %}
-              <a href="{{ site.baseurl }}{{ post.url }}">
-            {% endif %}
-                {{ post.title }}
-              </a>
-              <time class="post-date">{{ post.date | date: "%Y-%m-%d" }}</time>
-          </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
+    <li>
+      <a href="#{{ tag[0] }}">
+        <span>{{ tag[0] }}</span>
+        <span class="count">{{ tag[1] | size }}</span>
+      </a>
+    </li>
     {% endfor %}
-  </div>
+  </ul>
+
+  {% for tag in site.tags %}
+  <h2 id="{{ tag[0] }}">
+    {{ tag[0] }}
+  </h2>
+  <ul class="tag">
+    {% for post in tag[1] %}
+    {% if post.title != null %}
+    <li>
+      {% if post.link %}
+      <a href="{{ post.link }}">
+        {% else %}
+        <a href="{{ site.baseurl }}{{ post.url }}">
+          {% endif %}
+          {{ post.title }}
+        </a>
+        <time>{{ post.date | date: "%Y-%m-%d" }}</time>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+  {% endfor %}
 </div>
 
 <style>
-  /* 全局容器样式 */
-  .tags-container {
-    padding: 1rem;
-    max-width: 800px;
-    margin: 0 auto;
-    font-family: "Arial", sans-serif;
-  }
-
-  /* 标签列表样式 */
-  .tag-list {
-    margin-bottom: 2rem;
-  }
-
-  .tag-labels {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 0;
-  }
-
-  .tag-labels li {
-    display: inline-block;
-    margin: 0;
-  }
-
-  .tag-labels a {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background-color: #20c997; /* Open Color green */
-    color: #fff; /* White text for contrast */
-    border-radius: 20px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: background-color 0.3s, transform 0.2s;
-  }
-
-  .tag-labels a:hover {
-    background-color: #12b886; /* Darker green */
-    transform: scale(1.05);
-  }
-
-  /* 标签文章列表样式 */
-  .tag-posts {
-    margin-top: 2rem;
-  }
-
-  .tag-title {
-    margin-top: 2rem;
-    color: #000; /* Black for title */
-    font-size: 1.5rem;
-    border-bottom: 2px solid #868e96; /* Open Color gray-5 */
-    padding-bottom: 0.5rem;
-  }
-
-  .tag-post-list {
-    list-style: none;
-    padding: 0;
-  }
-
-  .tag-post-list li {
-    margin-bottom: 0.5rem;
-  }
-
-  .tag-post-list a {
-    color: #20c997; /* Open Color green */
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: color 0.2s;
-  }
-
-  .tag-post-list a:hover {
-    color: #12b886; /* Darker green */
-    text-decoration: underline;
-  }
-
-  .post-date {
-    font-size: 0.85rem;
-    color: #868e96; /* Open Color gray-5 */
-    margin-left: 0.5rem;
+  h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
   }
 </style>
