@@ -5,28 +5,31 @@ permalink: /tags/
 ---
 
 {% if site.posts.size == 0 %}
-  <h2>No post found</h2>
+  <h2>No posts found</h2>
 {% endif %}
 
-<div class="tags">
-  <ul class="label">
-    {% for tag in site.tags %}
-    <li>
-      <a href="#{{ tag[0] }}">
-        <span>{{ tag[0] }}</span>
-        <span class="count">{{ tag[1] | size }}</span>
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
+<div class="tags-container">
+  <!-- 标签列表 -->
+  <div class="tag-list">
+    <ul class="tag-labels">
+      {% for tag in site.tags %}
+      <li>
+        <a href="#{{ tag[0] }}">
+          <span class="tag-name">{{ tag[0] }}</span>
+          <span class="tag-count">({{ tag[1] | size }})</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 
-  {% for tag in site.tags %}
-    <h2 id="{{ tag[0] }}">
-      {{ tag[0] }}
-    </h2>
-    <ul class="tag">
-      {% for post in tag[1] %}
-        {% if post.title != null %}
+  <!-- 按标签展示文章列表 -->
+  <div class="tag-posts">
+    {% for tag in site.tags %}
+      <h2 id="{{ tag[0] }}" class="tag-title">{{ tag[0] }}</h2>
+      <ul class="tag-post-list">
+        {% for post in tag[1] %}
+          {% if post.title != null %}
           <li>
             {% if post.link %}
               <a href="{{ post.link }}">
@@ -35,10 +38,89 @@ permalink: /tags/
             {% endif %}
                 {{ post.title }}
               </a>
-              <time>{{ post.date | date: "%Y-%m-%d" }}</time>
+              <time class="post-date">{{ post.date | date: "%Y-%m-%d" }}</time>
           </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </ul>
+    {% endfor %}
+  </div>
 </div>
+
+<style>
+  .tags-container {
+    padding: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .tag-list {
+    margin-bottom: 2rem;
+  }
+
+  .tag-labels {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0;
+  }
+
+  .tag-labels li {
+    display: inline-block;
+    margin: 0;
+  }
+
+  .tag-labels a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #0078d4;
+    color: white;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+  }
+
+  .tag-labels a:hover {
+    background-color: #005bb5;
+  }
+
+  .tag-posts {
+    margin-top: 2rem;
+  }
+
+  .tag-title {
+    margin-top: 2rem;
+    color: #333;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 0.5rem;
+  }
+
+  .tag-post-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .tag-post-list li {
+    margin-bottom: 0.5rem;
+  }
+
+  .tag-post-list a {
+    color: #0078d4;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+
+  .tag-post-list a:hover {
+    text-decoration: underline;
+  }
+
+  .post-date {
+    font-size: 0.85rem;
+    color: #999;
+    margin-left: 0.5rem;
+  }
+</style>
