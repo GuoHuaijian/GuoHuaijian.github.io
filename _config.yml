@@ -7,14 +7,14 @@
 # 井号后面的文字是说明文档，不会被程序读取。
 name: 她是故人
 # 描述/签名
-description: 有道无术,术尚可求 有术无道,止于术
+description: 路虽远,行则将至  事虽难,做则必成
 
 #
 # 下面的设定都是可选的
 #
 
 # 你的博客logo图片URL，建议尺寸不超过300px × 300px
-avatar: https://cdn.jsdelivr.net/gh/GuoHuaijian/picture@main/data/20250122162655012.jpg
+avatar: https://raw.githubusercontent.com/GuoHuaijian/picture/main/data/20250205144140379.jpg
 #https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/logo.png
 
 # 你的favicon（出现在浏览器tab上）图片URL，建议使用较小(64px × 64px)的图片
