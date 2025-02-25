@@ -56,9 +56,33 @@ permalink: /about/
 ### **🚀 行远自迩**
 > *道阻且长，行则将至*
 
-世间有剑，可斩因果，可断江河，可开天门……  
+世间有剑，可斩因果，可断江河，可开天门。 
 亦有少年，负剑星河，纵横天地，问道江湖。  
 
 若有一日，提剑登高，回望来路，愿此道不负少年志。  
 
 ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=GuoHuaijian&show_icons=true&theme=light)
+<style>
+  .music-player {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 330px;
+    height: 86px;
+    z-index: 1000; /* 让播放器始终在最上层 */
+  }
+
+  /* 适配小屏幕，让播放器自动缩小 */
+  @media screen and (max-width: 600px) {
+    .music-player {
+      width: 260px;
+      height: 66px;
+    }
+  }
+</style>
+
+<div class="music-player">
+  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="100%"
+    src="//music.163.com/outchain/player?type=2&id=1394167216&auto=1&height=66">
+  </iframe>
+</div>
