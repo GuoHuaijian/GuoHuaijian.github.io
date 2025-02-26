@@ -11,10 +11,10 @@ layout: default
   {% if paginator.page == 1 %}
   {% for post in site.posts %}
     {% if post.pinned==true %}
-      <article class="post pinned">
-        <h1>
-            <span title="pinned"><i data-feather="anchor"></i></span><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-        </h1>
+    <article class="post pinned">
+      <h1>
+          <span title="置顶" class="pin-icon">📌</span><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+      </h1>
 
         <div clsss="meta">
 
@@ -111,3 +111,189 @@ layout: default
     </span>
   {% endif %}
 </div>
+<style>
+  .posts {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem;  /* 减小外边距 */
+  }
+  
+  .post {
+    margin-bottom: 1.5rem;  /* 减小文章间距 */
+    padding: 1.2rem;  /* 减小内边距 */
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 6px;  /* 稍微减小圆角 */
+  }
+  
+  .post h1 {
+    margin: 0 0 0.8rem;  /* 减小标题下方间距 */
+    font-size: 1.4rem;  /* 稍微减小标题大小 */
+  }
+  
+  .post .meta {
+    margin-bottom: 0.8rem;  /* 减小元信息下方间距 */
+    gap: 0.8rem;  /* 减小元素间距 */
+  }
+  
+  .post-excerpt {
+    margin-top: 0.8rem;  /* 减小摘要上方间距 */
+  }
+  
+  .post-link {
+    margin-top: 0.8rem;  /* 减小按钮上方间距 */
+    padding: 0.4rem 0.8rem;  /* 减小按钮内边距 */
+  }
+  
+  .post:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(66, 185, 131, 0.1);
+  }
+  
+  .post.pinned {
+    border-left: 4px solid #42b983;
+    background: rgba(66, 185, 131, 0.03);
+  }
+  
+  .post h1 {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    line-height: 1.4;
+  }
+  
+  .post h1 a {
+    color: #2c3e50;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .post h1 a:hover {
+    color: #42b983;
+  }
+  
+  .post .meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .post .author {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .post .author::before {
+    content: '👤';
+    margin-right: 0.3rem;
+  }
+  
+  .post .date {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .post .date::before {
+    content: '📅';
+    margin-right: 0.3rem;
+  }
+  
+  .post .tag {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .post .tag li a {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.8rem;
+    color: #42b983;
+    background: rgba(66, 185, 131, 0.1);
+    border-radius: 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .post .tag li a:hover {
+    background: #42b983;
+    color: white;
+  }
+  
+  .post-excerpt {
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  .post-link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    color: #42b983;
+    text-decoration: none;
+    border: 1px solid #42b983;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+  
+  .post-link:hover {
+    background: #42b983;
+    color: white;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem auto;
+    max-width: 800px;
+    padding: 0 2rem;
+  }
+  
+  .pagination a {
+    padding: 0.5rem 1rem;
+    color: #42b983;
+    text-decoration: none;
+    border: 1px solid #42b983;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .pagination a:hover {
+    background: #42b983;
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .posts {
+      padding: 1rem;
+    }
+    
+    .post {
+      padding: 1rem;
+    }
+    
+    .post .meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }
+  .pin-icon {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+    display: inline-block;
+    transform-origin: center;
+    animation: pinFloat 2s ease-in-out infinite;
+  }
+
+  @keyframes pinFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-3px) rotate(5deg); }
+  }
+  </style>
