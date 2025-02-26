@@ -4,52 +4,163 @@ title: 标签
 permalink: /tags/
 ---
 
-{% if site.posts.size == 0 %}
-<h2>No post found</h2>
-{% endif %}
+<div class="tags-container">
+  {% if site.posts.size == 0 %}
+  <div class="no-posts">暂无文章</div>
+  {% endif %}
 
-<div class="tags">
-  <ul class="label">
-    {% for tag in site.tags %}
-    <li>
-      <a href="#{{ tag[0] }}">
-        <span>{{ tag[0] }}</span>
-        <span class="count">{{ tag[1] | size }}</span>
+  <div class="tags">
+    <div class="tags-cloud">
+      {% for tag in site.tags %}
+      <a href="#{{ tag[0] }}" class="tag-item">
+        <span class="tag-name">{{ tag[0] }}</span>
+        <span class="tag-count">{{ tag[1] | size }}</span>
       </a>
-    </li>
-    {% endfor %}
-  </ul>
+      {% endfor %}
+    </div>
 
-  {% for tag in site.tags %}
-  <h2 id="{{ tag[0] }}">
-    {{ tag[0] }}
-  </h2>
-  <ul class="tag">
-    {% for post in tag[1] %}
-    {% if post.title != null %}
-    <li>
-      {% if post.link %}
-      <a href="{{ post.link }}">
-        {% else %}
-        <a href="{{ site.baseurl }}{{ post.url }}">
+    <div class="tags-list">
+      {% for tag in site.tags %}
+      <div class="tag-section">
+        <h2 id="{{ tag[0] }}">
+          <span class="tag-icon">🎯</span>
+          {{ tag[0] }}
+        </h2>
+        <ul class="post-list">
+          {% for post in tag[1] %}
+          {% if post.title != null %}
+          <li class="post-item">
+            <time class="post-date">{{ post.date | date: "%Y-%m-%d" }}</time>
+            {% if post.link %}
+            <a href="{{ post.link }}" class="post-link">
+            {% else %}
+            <a href="{{ site.baseurl }}{{ post.url }}" class="post-link">
+            {% endif %}
+              {{ post.title }}
+            </a>
+          </li>
           {% endif %}
-          {{ post.title }}
-        </a>
-        <time>{{ post.date | date: "%Y-%m-%d" }}</time>
-    </li>
-    {% endif %}
-    {% endfor %}
-  </ul>
-  {% endfor %}
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 </div>
 
 <style>
-  h2 {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-size: 24px;
-    color: #333;
-    border-bottom: 2px solid #ddd;
-    padding-bottom: 5px;
+.tags-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.no-posts {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 2rem;
+}
+
+.tags-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding: 0.8rem;
+  background: rgba(66, 185, 131, 0.05);
+  border-radius: 8px;
+}
+
+.tag-item {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.8rem;
+  background: white;
+  border: 1px solid rgba(66, 185, 131, 0.3);
+  border-radius: 15px;
+  color: #42b983;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.tag-count {
+  margin-left: 0.4rem;
+  font-size: 0.75rem;
+  background: rgba(66, 185, 131, 0.1);
+  padding: 0.1rem 0.4rem;
+  border-radius: 8px;
+}
+
+.tag-section {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0 1rem;
+  font-size: 1.5rem;
+  color: #2c3e50;
+  border-bottom: 2px solid rgba(66, 185, 131, 0.2);
+  padding-bottom: 0.5rem;
+}
+
+.tag-icon {
+  margin-right: 0.5rem;
+}
+
+.post-list {
+  list-style: none;
+  padding-left: 1rem;
+  margin: 0;
+}
+
+.post-item {
+  margin: 0.8rem 0;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.post-item:hover {
+  transform: translateX(5px);
+}
+
+.post-date {
+  font-size: 0.9rem;
+  color: #999;
+  min-width: 100px;
+}
+
+.post-link {
+  color: #2c3e50;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  margin-left: 1rem;
+}
+
+.post-link:hover {
+  color: #42b983;
+}
+
+@media (max-width: 768px) {
+  .tags-container {
+    padding: 1rem;
   }
+  
+  .post-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .post-date {
+    margin-bottom: 0.3rem;
+  }
+  
+  .post-link {
+    margin-left: 0;
+  }
+}
 </style>
