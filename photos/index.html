@@ -140,7 +140,7 @@ permalink: /photos/
 /* 优化现有样式 */
 /* 页面容器自适应优化 */
 .gallery-page {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  box-shadow: 0 5px 25px rgba(18, 184, 134, 0.08)
   min-height: 100%;
   height: auto;
   padding: 40px 20px;
@@ -451,7 +451,7 @@ function showAlbum(albumId) {
   document.getElementById('photos-view').style.display = 'block';
   // 移除 gallery-page 的背景和内边距
   const galleryPage = document.querySelector('.gallery-page');
-  galleryPage.style.background = 'none';
+  galleryPage.style.boxShadow = 'none';
   galleryPage.style.padding = '0';
 }
 
@@ -464,7 +464,7 @@ function showAlbums() {
     albumsView.style.display = 'block';
     // 恢复 gallery-page 的背景和内边距
     const galleryPage = document.querySelector('.gallery-page');
-    galleryPage.style.background = 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)';
+    galleryPage.style.boxShadow = '0 4px 20px rgba(18, 184, 134, 0.1)';
     galleryPage.style.padding = '40px 20px';
   } else {
     console.error('Albums or photos view not found');
