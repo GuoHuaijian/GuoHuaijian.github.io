@@ -26,8 +26,10 @@ favicon: https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/fav
 navigation:
   - name: 首页
     url: /
-  - name: 分类
-    url: /tags
+  - name: 相册
+    url: /photos
+  # - name: 分类
+  #   url: /tags
   - name: 归档
     url: /archive
   - name: 关于
@@ -122,3 +124,14 @@ exclude:
   - README.md
   - CNAME
 
+# 相册配置
+albums:
+  travel:
+    title: "🌄 旅行日记"
+    description: "记录旅途中的美好瞬间"
+    path: "/images/albums/travel"
+  code:
+    title: "💻 代码生活"
+    description: "程序员的日常记录"
+    path: "/images/albums/code"
+    # 不设置 cover，将自动使用最后一张照片作为封面

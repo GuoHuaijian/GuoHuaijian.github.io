@@ -1,0 +1,489 @@
+---
+layout: page
+title: 相册
+permalink: /photos/
+---
+
+<!-- 添加加载动画 -->
+<div class="loading-overlay" id="loading">
+  <div class="loading-spinner"></div>
+</div>
+
+<div class="gallery-page">
+  <div id="albums-view" class="albums-container">
+    <div class="album-grid">
+    {% for album in site.albums %}
+      {% assign photos = site.static_files | where_exp: "item", "item.path contains album[1].path" %}
+      {% assign cover_photo = album[1].cover | default: photos.last.path %}
+      <div class="album-wrapper">
+        <div class="album-item" onclick="showAlbum('{{ album[0] }}')">
+          <img src="{{ cover_photo }}" alt="{{ album[1].title }}" loading="lazy">
+          <div class="album-overlay">
+            <span class="photo-count">{{ photos.size }} 张照片</span>
+          </div>
+        </div>
+        <div class="album-info-below">
+          <h3>{{ album[1].title }}</h3>
+          <p>{{ album[1].description }}</p>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+
+  <div id="photos-view" class="gallery-container" style="display: none;">
+    <div class="gallery-header">
+      <button onclick="showAlbums()" class="back-button">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z"></path>
+        </svg>
+        返回相册
+      </button>
+      <div class="header-info">
+        <h2 id="album-title"></h2>
+        <p id="album-description"></p>
+      </div>
+    </div>
+    <div id="photo-grid" class="photo-grid"></div>
+  </div>
+</div>
+
+<style>
+/* 添加新样式 */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #12b886;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.album-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.7));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+}
+
+.album-wrapper:hover .album-overlay {
+  opacity: 1;
+}
+
+.photo-count {
+  color: white;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.header-info {
+  flex: 1;
+}
+
+/* 返回按钮样式修复 */
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #12b886;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(18, 184, 134, 0.2);
+}
+
+.back-button:hover {
+  background: #0ca678;
+  transform: translateX(-5px);
+  box-shadow: 0 4px 12px rgba(18, 184, 134, 0.3);
+}
+
+.back-button svg {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover svg {
+  transform: translateX(-5px);
+}
+
+/* 优化现有样式 */
+/* 页面容器自适应优化 */
+.gallery-page {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100%;
+  height: auto;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.albums-container {
+  flex: 1;
+  width: 100%;
+}
+
+.gallery-container {
+  flex: 1;
+  width: 100%;
+  height: auto;
+}
+
+/* 相册网格布局优化 */
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 相册卡片样式优化 */
+.album-wrapper {
+  position: relative;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(18, 184, 134, 0.2);
+}
+
+.album-item {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+
+.album-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: brightness(0.95);
+}
+
+.album-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.album-wrapper:hover {
+  transform: translateY(-8px);
+  border-color: rgba(18, 184, 134, 0.4);
+  box-shadow: 0 15px 30px rgba(18, 184, 134, 0.15);
+}
+
+.album-wrapper:hover .album-overlay {
+  opacity: 1;
+}
+
+.album-wrapper:hover .album-item img {
+  transform: scale(1.08);
+  filter: brightness(1);
+}
+
+/* 相册信息样式优化 */
+.album-info-below {
+  padding: 20px;
+  background: #fff;
+  border-top: 1px solid rgba(18, 184, 134, 0.1);
+}
+
+.album-info-below h3 {
+  font-size: 1.3em;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 8px 0;
+}
+
+.album-info-below p {
+  font-size: 0.95em;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* 照片数量标签样式 */
+.photo-count {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(18, 184, 134, 0.9);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 相册详情页样式优化 */
+/* 相册详情页容器优化 */
+.gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 24px;
+  backdrop-filter: blur(15px);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  height: auto;
+}
+
+/* 照片网格优化 */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 5px 25px rgba(18, 184, 134, 0.08);
+  flex: 1;
+  height: auto;
+}
+
+/* 相册头部优化 */
+.gallery-header {
+  margin-bottom: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(18, 184, 134, 0.1);
+}
+.header-info h2 {
+  font-size: 2em;
+  color: #2c3e50;
+  margin: 0 0 8px 0;
+}
+
+.header-info p {
+  font-size: 1.1em;
+  color: #666;
+  margin: 0;
+}
+
+/* 照片网格样式优化 */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(18, 184, 134, 0.1);
+}
+
+.photo-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+  aspect-ratio: 1; /* 修改为1:1比例 */
+  line-height: 0; /* 移除底部空白 */
+}
+
+.photo-item a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 0; /* 移除底部空白 */
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  display: block; /* 移除图片底部间隙 */
+}
+
+.photo-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(18, 184, 134, 0.2);
+}
+
+/* Lightbox 样式优化 */
+.lb-outerContainer {
+  border-radius: 16px 16px 0 0 !important;
+  background: #fff !important;
+}
+
+.lb-dataContainer {
+  border-radius: 0 0 16px 16px !important;
+  background: #fff !important;
+  padding: 20px !important;
+}
+
+.lb-data .lb-caption {
+  font-size: 16px !important;
+  color: #2c3e50 !important;
+  margin-bottom: 10px !important;
+}
+
+.lb-data .lb-number {
+  color: #666 !important;
+  font-size: 14px !important;
+}
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .gallery-page {
+    padding: 20px 10px;
+  }
+  
+  .album-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 15px;
+    padding: 15px;
+  }
+  
+  .photo-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+  
+  .gallery-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+}
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+
+<script>
+// 修改相册数据的生成方式
+const albumsData = {
+{% for album in site.albums %}
+  '{{ album[0] }}': {
+    title: '{{ album[1].title }}',
+    description: '{{ album[1].description }}',
+    path: '{{ album[1].path }}',
+    photos: [
+      {% assign photos = site.static_files | where_exp: "item", "item.path contains album[1].path" %}
+      {% for photo in photos %}
+        {
+          url: '{{ photo.path }}',
+          caption: '{{ photo.basename }}'
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+};
+
+// 修改相册数据生成和展示逻辑
+function showAlbum(albumId) {
+  const album = albumsData[albumId];
+  if (!album) {
+    console.error('Album not found:', albumId);
+    return;
+  }
+
+  document.getElementById('album-title').textContent = album.title;
+  const descEl = document.getElementById('album-description');
+  if (descEl) {
+    descEl.textContent = album.description;
+  }
+  
+  const photoGrid = document.getElementById('photo-grid');
+  const photos = album.photos.filter(photo => !photo.url.endsWith('cover.jpg'));
+  
+  photoGrid.innerHTML = photos.map(photo => `
+    <div class="photo-item">
+      <a href="${photo.url}" data-lightbox="album-${albumId}" data-title="${photo.caption}">
+        <img src="${photo.url}" alt="${photo.caption}">
+      </a>
+    </div>
+  `).join('');
+
+  // 隐藏相册列表并显示详情页
+  document.getElementById('albums-view').style.display = 'none';
+  document.getElementById('photos-view').style.display = 'block';
+  // 移除 gallery-page 的背景和内边距
+  const galleryPage = document.querySelector('.gallery-page');
+  galleryPage.style.background = 'none';
+  galleryPage.style.padding = '0';
+}
+
+function showAlbums() {
+  const albumsView = document.getElementById('albums-view');
+  const photosView = document.getElementById('photos-view');
+  
+  if (albumsView && photosView) {
+    photosView.style.display = 'none';
+    albumsView.style.display = 'block';
+    // 恢复 gallery-page 的背景和内边距
+    const galleryPage = document.querySelector('.gallery-page');
+    galleryPage.style.background = 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)';
+    galleryPage.style.padding = '40px 20px';
+  } else {
+    console.error('Albums or photos view not found');
+  }
+}
+
+// 添加键盘事件支持
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    showAlbums();
+  }
+});
+// 确保 lightbox 正确初始化
+document.addEventListener('DOMContentLoaded', function() {
+  lightbox.option({
+    'resizeDuration': 200,
+    'wrapAround': true,
+    'albumLabel': "第 %1 张 / 共 %2 张",  // 修改为中文标签
+    'fadeDuration': 300
+  });
+});
+</script>
