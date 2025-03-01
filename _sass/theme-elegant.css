@@ -439,7 +439,108 @@
         font-size: 18px;
       }
     }
-    
+
+   /* 元数据容器样式 */
+  .meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 1rem 0 2rem;
+    padding: 1rem;
+    background: rgba(77, 208, 225, 0.05);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(77, 208, 225, 0.08);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(77, 208, 225, 0.1);
+    }
   }
 
+  /* 作者样式 */
+  .author {
+    display: inline-flex;
+    align-items: center;
+    color: #595959;
+    font-weight: 500;
+    transition: all 0.3s ease;
 
+    &::before {
+      content: '👤';
+      margin-right: 0.5rem;
+      font-size: 1.1em;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover::before {
+      transform: scale(1.2);
+    }
+  }
+
+  /* 日期样式 */
+  .date {
+    display: inline-flex;
+    align-items: center;
+    color: #595959;
+    font-weight: 500;
+
+    &::before {
+      content: '📅';
+      margin-right: 0.5rem;
+      font-size: 1.1em;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover::before {
+      transform: scale(1.2);
+    }
+  }
+
+  /* 标签容器样式 */
+  .tag {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: inline-flex;  /* 改为 inline-flex */
+    gap: 0.8rem;
+    flex-wrap: nowrap;    /* 改为 nowrap 防止换行 */
+  
+    li {
+      white-space: nowrap; /* 添加防止标签文字换行 */
+      
+      a {
+        display: inline-block;
+        padding: 0.3rem 0.8rem;
+        font-size: 0.9rem;
+        color: #26c6da;
+        background: rgba(77, 208, 225, 0.1);
+        border-radius: 15px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+  
+        &:hover {
+          color: #4dd0e1;  /* 修改悬浮时的文字颜色 */
+          background: rgba(77, 208, 225, 0.2);
+          transform: translateY(-2px);
+          box-shadow: 0 2px 8px rgba(77, 208, 225, 0.2);
+        }
+      }
+    }
+  }
+
+  /* 响应式调整 */
+  @media (max-width: 720px) {
+    .meta {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .tag {
+      flex-wrap: wrap;
+      width: auto;  /* 移除固定宽度 */
+    }
+  }
+  }
