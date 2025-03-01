@@ -30,5 +30,244 @@
       {% include footer.html %}
     </footer>
 
+    <style>
+    .toc {
+      position: fixed;
+      right: 2rem;
+      width: 280px;
+      top: 8rem;
+      bottom: 0.1rem;  /* 添加底部距离 */
+      max-height: none;  /* 移除最大高度限制 */
+      height: auto;  /* 自动高度 */
+      overflow-y: auto;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 1.2rem 1.5rem;
+      border-radius: 6px;
+      box-shadow: 0 1px 8px rgba(47, 132, 94, 0.03);
+      border: none;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
 
+    .toc:hover {
+      background: rgba(255, 255, 255, 0.92);  /* 悬停时略微增加不透明度 */
+      box-shadow: 0 2px 12px rgba(47, 132, 94, 0.05);  /* 悬停时轻微增加阴影 */
+      transform: translateY(-1px);
+    }
+
+    .toc-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2f845e;
+      margin-bottom: 1rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(47, 132, 94, 0.05);  /* 更淡的分隔线 */
+    }
+
+    .toc-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .toc-item-2 { /* h2 标题 */
+      margin: 0.8rem 0;
+      padding-left: 0;
+    }
+
+    .toc-item-3 { /* h3 标题 */
+      margin: 0.5rem 0;
+      padding-left: 1.2rem;
+      font-size: 0.9em;
+    }
+
+    .toc-item-4 { /* h4 标题 */
+      margin: 0.3rem 0;
+      padding-left: 2.4rem;
+      font-size: 0.85em;
+    }
+
+    .toc a {
+      color: #555;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: block;
+      padding: 0.3rem 0.5rem;
+      border-radius: 4px;
+      border-left: 2px solid transparent;
+    }
+
+    .toc a:hover,
+    .toc a.active {  /* 添加激活状态样式 */
+      color: #2f845e;
+      background: rgba(47, 132, 94, 0.08);
+      border-left: 2px solid #2f845e;
+      padding-left: 0.8rem;
+    }
+
+    /* 自定义滚动条 */
+    .toc::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .toc::-webkit-scrollbar-track {
+      background: #f0f0f0;
+      border-radius: 3px;
+    }
+
+    .toc::-webkit-scrollbar-thumb {
+      background: #2f845e;
+      border-radius: 3px;
+    }
+
+    /* 响应式处理 */
+    @media (max-width: 1024px) {
+      .toc {
+        display: none;
+      }
+    }
+    .toc-list li {
+      position: relative;
+    }
+
+    .toc a {
+      position: relative;  /* 添加相对定位 */
+      padding-right: 30px;  /* 为三角形预留空间 */
+    }
+
+    /* 只有包含子菜单的项目才显示三角形 */
+    .toc-list li:has(> ul) > a::after {
+      content: '▼';
+      display: inline-block;
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 0.8em;
+      color: #2f845e;
+      opacity: 0.7;
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      text-align: center;
+    }
+
+    .toc-list li.collapsed > a::after {
+      transform: translateY(-50%) rotate(-90deg);
+    }
+
+    .toc-list li > ul {
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .toc-list li.collapsed > ul {
+      height: 0;
+      opacity: 0;
+    }
+
+    .toc-list li > a::after {
+      display: none;  /* 默认隐藏所有三角形 */
+    }
+    .back-to-top {
+      position: fixed;
+      right: 2rem;
+      bottom: 2rem;
+      width: 40px;
+      height: 40px;
+      background: rgba(47, 132, 94, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(47, 132, 94, 0.2);
+      z-index: 1000;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: rgba(47, 132, 94, 1);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(47, 132, 94, 0.3);
+    }
+    </style>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const tocLinks = document.querySelectorAll('.toc a');
+      const sections = {};
+      
+      // 为所有目录项添加点击事件
+      document.querySelectorAll('.toc-list li').forEach(item => {
+        const link = item.querySelector('a');
+        const hasSubmenu = item.querySelector('ul');
+        
+        if (hasSubmenu) {
+          // 点击三角形图标时的处理
+          link.addEventListener('click', function(e) {
+            const rect = link.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            
+            // 如果点击位置在右侧20px范围内（三角形区域）
+            if (clickX > rect.width - 25) {
+              e.preventDefault();
+              item.classList.toggle('collapsed');
+            }
+          });
+        }
+      });
+
+      tocLinks.forEach(link => {
+        const id = link.getAttribute('href').substring(1);
+        sections[id] = document.getElementById(id);
+      });
+
+      function highlightToc() {
+        const scrollPos = window.scrollY;
+
+        for (let id in sections) {
+          const section = sections[id];
+          if (section.offsetTop <= scrollPos + 100 && 
+              section.offsetTop + section.offsetHeight > scrollPos + 100) {
+            tocLinks.forEach(link => link.classList.remove('active'));
+            document.querySelector(`.toc a[href="#${id}"]`).classList.add('active');
+          }
+        }
+      }
+
+      window.addEventListener('scroll', highlightToc);
+    });
+     // 回到顶部功能
+     document.addEventListener('DOMContentLoaded', function() {
+      const backToTop = document.querySelector('.back-to-top');
+      
+      // 监听滚动事件
+      window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      });
+      
+      // 点击回到顶部
+      backToTop.addEventListener('click', function() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    });
+    </script>
 </html>
