@@ -51,6 +51,165 @@ layout: default
   {% endif %}
 </div>
  <style>
+   /* 文章头部样式 */
+.posts {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.posts h1 {
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #2f845e;
+  text-align: left;
+  position: relative;
+  transition: transform 0.4s ease;
+}
+
+.posts h1:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(152, 251, 152, 0), #E8F4EE, rgba(152, 251, 152, 0));
+  transition: transform 0.4s ease;
+  transform: scaleX(0);
+  transform-origin: center;
+  z-index: -1;
+}
+
+.posts h1:hover {
+  transform: scale(1.1);
+}
+
+.posts h1:hover:before {
+  transform: scaleX(1);
+}
+
+/* 元数据容器样式 */
+.meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1rem 0 2rem;
+  padding: 1rem;
+  background: rgba(47, 132, 94, 0.05);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.meta:hover {
+  background: rgba(47, 132, 94, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(47, 132, 94, 0.1);
+}
+
+/* 作者样式 */
+.author {
+  display: inline-flex;
+  align-items: center;
+  color: #868e96;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.author::before {
+  content: '👤';
+  margin-right: 0.5rem;
+  font-size: 1.1em;
+  transition: transform 0.3s ease;
+}
+
+.author:hover::before {
+  transform: scale(1.2);
+}
+
+/* 日期样式 */
+.date {
+  display: inline-flex;
+  align-items: center;
+  color: #868e96;
+  font-weight: 500;
+}
+
+/* 日期样式修改 */
+.date::before {
+  content: '📅';
+  margin-right: 0.5rem;
+  font-size: 1.1em;
+  transition: transform 0.3s ease;
+}
+
+.date:hover::before {
+  transform: scale(1.2);  /* 移除旋转效果，只保留缩放 */
+}
+
+/* 标签样式修改 */
+.tag li a {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.9rem;
+  color: #2f845e;
+  background: rgba(47, 132, 94, 0.1);
+  border-radius: 15px;  /* 保持圆角效果 */
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.tag li a:hover {
+  background: #2f845e;
+  color: white;
+  transform: translateY(-2px);  /* 只保留上浮效果 */
+  box-shadow: 0 2px 8px rgba(47, 132, 94, 0.2);
+}
+
+/* 标签容器样式 */
+.tag {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+/* 标签样式 */
+.tag li a {
+  display: inline-block;
+  padding: 0.3rem 0.8rem !important;
+  font-size: 0.9rem;
+  color: #2f845e !important;
+  background: rgba(47, 132, 94, 0.15) !important;  /* 添加 !important 确保样式生效 */
+  border-radius: 15px !important;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.tag li a:hover {
+  background: rgba(47, 132, 94, 0.3) !important;  /* 悬停时背景色加深 */
+  color: #2f845e !important;  /* 保持文字颜色不变 */
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(47, 132, 94, 0.2);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .tag {
+    width: 100%;
+  }
+}
     .entry {
       line-height: 1.8;
       font-size: 16px;
