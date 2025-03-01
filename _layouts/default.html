@@ -210,71 +210,126 @@
     }
     </style>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const tocLinks = document.querySelectorAll('.toc a');
-      const sections = {};
-      
-      // 为所有目录项添加点击事件
-      document.querySelectorAll('.toc-list li').forEach(item => {
-        const link = item.querySelector('a');
-        const hasSubmenu = item.querySelector('ul');
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const tocLinks = document.querySelectorAll('.toc a');
+        const sections = {};
         
-        if (hasSubmenu) {
-          // 点击三角形图标时的处理
-          link.addEventListener('click', function(e) {
-            const rect = link.getBoundingClientRect();
-            const clickX = e.clientX - rect.left;
+        // 为所有目录项添加点击事件
+        document.querySelectorAll('.toc-list li').forEach(item => {
+          const link = item.querySelector('a');
+          const hasSubmenu = item.querySelector('ul');
+          
+          if (hasSubmenu) {
+            // 点击三角形图标时的处理
+            link.addEventListener('click', function(e) {
+              const rect = link.getBoundingClientRect();
+              const clickX = e.clientX - rect.left;
+              
+              if (clickX > rect.width - 25) {
+                e.preventDefault();
+                item.classList.toggle('collapsed');
+              }
+            });
+          }
+        });
+  
+        // 收集所有标题元素
+        tocLinks.forEach(link => {
+          const id = link.getAttribute('href').substring(1);
+          sections[id] = document.getElementById(id);
+        });
+  
+        function highlightToc() {
+          const scrollPos = window.scrollY;
+          let currentSection = null;
+          
+          // 遍历所有标题，找到当前可见的标题
+          for (let id in sections) {
+            const section = sections[id];
+            const sectionTop = section.offsetTop;
             
-            // 如果点击位置在右侧20px范围内（三角形区域）
-            if (clickX > rect.width - 25) {
-              e.preventDefault();
-              item.classList.toggle('collapsed');
+            if (sectionTop - 100 <= scrollPos && sectionTop + section.offsetHeight > scrollPos) {
+              currentSection = id;
+              break;
+            }
+          }
+  
+          // 更新目录高亮状态
+          if (currentSection) {
+            tocLinks.forEach(link => link.classList.remove('active'));
+            const activeLink = document.querySelector(`.toc a[href="#${currentSection}"]`);
+            if (activeLink) {
+              activeLink.classList.add('active');
+              
+              // 确保高亮的目录项在视图中可见
+              const tocContainer = document.querySelector('.toc');
+              const linkRect = activeLink.getBoundingClientRect();
+              const containerRect = tocContainer.getBoundingClientRect();
+              
+              if (linkRect.top < containerRect.top || linkRect.bottom > containerRect.bottom) {
+                activeLink.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'center'
+                });
+              }
+            }
+          }
+        }
+  
+        // 使用 IntersectionObserver 优化滚动性能
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              highlightToc();
             }
           });
-        }
+        }, {
+          threshold: 0.1
+        });
+  
+        // 观察所有标题元素
+        Object.values(sections).forEach(section => {
+          observer.observe(section);
+        });
+  
+        // 仍然保留滚动事件监听，以实现更平滑的效果
+        window.addEventListener('scroll', throttle(highlightToc, 100));
       });
-
-      tocLinks.forEach(link => {
-        const id = link.getAttribute('href').substring(1);
-        sections[id] = document.getElementById(id);
-      });
-
-      function highlightToc() {
-        const scrollPos = window.scrollY;
-
-        for (let id in sections) {
-          const section = sections[id];
-          if (section.offsetTop <= scrollPos + 100 && 
-              section.offsetTop + section.offsetHeight > scrollPos + 100) {
-            tocLinks.forEach(link => link.classList.remove('active'));
-            document.querySelector(`.toc a[href="#${id}"]`).classList.add('active');
+  
+      // 节流函数
+      function throttle(func, limit) {
+        let inThrottle;
+        return function() {
+          const args = arguments;
+          const context = this;
+          if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
           }
         }
       }
-
-      window.addEventListener('scroll', highlightToc);
-    });
-     // 回到顶部功能
-     document.addEventListener('DOMContentLoaded', function() {
-      const backToTop = document.querySelector('.back-to-top');
-      
-      // 监听滚动事件
-      window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-          backToTop.classList.add('visible');
-        } else {
-          backToTop.classList.remove('visible');
-        }
-      });
-      
-      // 点击回到顶部
-      backToTop.addEventListener('click', function() {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
+       // 回到顶部功能
+       document.addEventListener('DOMContentLoaded', function() {
+        const backToTop = document.querySelector('.back-to-top');
+        
+        // 监听滚动事件
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 300) {
+            backToTop.classList.add('visible');
+          } else {
+            backToTop.classList.remove('visible');
+          }
+        });
+        
+        // 点击回到顶部
+        backToTop.addEventListener('click', function() {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
         });
       });
-    });
-    </script>
+      </script>
 </html>
