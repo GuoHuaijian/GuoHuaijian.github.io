@@ -24,15 +24,15 @@ favicon: https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/fav
 
 # 菜单中的按钮
 navigation:
-  - name: 首页
+  - name: 🏠首页
     url: /
-  - name: 相册
+  - name: 📸相册
     url: /photos
   # - name: 分类
   #   url: /tags
-  - name: 归档
+  - name: 📚归档
     url: /archive
-  - name: 关于
+  - name: 👨‍💻关于
     url: /about
 
 # 每页的文章数
