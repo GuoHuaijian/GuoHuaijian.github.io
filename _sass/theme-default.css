@@ -1,0 +1,795 @@
+
+   /* 文章头部样式 */
+.posts {
+  max-width: 90%;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.posts h1 {
+  margin-top: 1.2em;
+  margin-bottom: 0.6em;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #2f845e;
+  text-align: center;
+  position: relative;
+  transition: transform 0.4s ease;
+}
+
+.posts h1:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(152, 251, 152, 0), #E8F4EE, rgba(152, 251, 152, 0));
+  transition: transform 0.4s ease;
+  transform: scaleX(0);
+  transform-origin: center;
+  z-index: -1;
+}
+
+.posts h1:hover {
+  transform: scale(1.1);
+}
+
+.posts h1:hover:before {
+  transform: scaleX(1);
+}
+
+/* 元数据容器样式 */
+.meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1rem 0 2rem;
+  padding: 1rem;
+  background: rgba(47, 132, 94, 0.05);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.meta:hover {
+  background: rgba(47, 132, 94, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(47, 132, 94, 0.1);
+}
+
+/* 作者样式 */
+.author {
+  display: inline-flex;
+  align-items: center;
+  color: #868e96;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.author::before {
+  content: '👤';
+  margin-right: 0.5rem;
+  font-size: 1.1em;
+  transition: transform 0.3s ease;
+}
+
+.author:hover::before {
+  transform: scale(1.2);
+}
+
+/* 日期样式 */
+.date {
+  display: inline-flex;
+  align-items: center;
+  color: #868e96;
+  font-weight: 500;
+}
+
+/* 日期样式修改 */
+.date::before {
+  content: '📅';
+  margin-right: 0.5rem;
+  font-size: 1.1em;
+  transition: transform 0.3s ease;
+}
+
+.date:hover::before {
+  transform: scale(1.2);  /* 移除旋转效果，只保留缩放 */
+}
+
+/* 标签样式修改 */
+.tag li a {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.9rem;
+  color: #2f845e;
+  background: rgba(47, 132, 94, 0.1);
+  border-radius: 15px;  /* 保持圆角效果 */
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.tag li a:hover {
+  background: #2f845e;
+  color: white;
+  transform: translateY(-2px);  /* 只保留上浮效果 */
+  box-shadow: 0 2px 8px rgba(47, 132, 94, 0.2);
+}
+
+/* 标签容器样式 */
+.tag {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+/* 标签样式 */
+.tag li a {
+  display: inline-block;
+  padding: 0.3rem 0.8rem !important;
+  font-size: 0.9rem;
+  color: #2f845e !important;
+  background: rgba(47, 132, 94, 0.15) !important;  /* 添加 !important 确保样式生效 */
+  border-radius: 15px !important;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.tag li a:hover {
+  background: rgba(47, 132, 94, 0.3) !important;  /* 悬停时背景色加深 */
+  color: #2f845e !important;  /* 保持文字颜色不变 */
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(47, 132, 94, 0.2);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .tag {
+    width: 100%;
+  }
+}
+    .entry {
+      line-height: 1.8;
+      font-size: 16px;
+      padding: 0;
+      color: #282c34;
+      background: #fefefe;
+      max-width: 90%;
+      margin: 0;
+      text-align: left;
+    }
+    
+    /* 列表基础样式 */
+    .entry ul, .entry ol {
+      padding-left: 0.5rem;
+      margin: 0 0 20px 0;
+      list-style: none;
+    }
+
+    /* 无序列表第一级 */
+    .entry ul li {
+      position: relative;
+      padding-left: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    .entry ul li:before {
+      content: '🌱';  /* 第一级用新芽 */
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+    }
+
+    /* 无序列表第二级 */
+    .entry ul ul {
+      padding-left: 1em;
+      margin: 10px 0;
+    }
+
+    .entry ul ul li:before {
+      content: '🍀';  /* 第二级用四叶草 */
+      font-size: 0.9em;
+      top: 3px;
+    }
+
+    /* 无序列表第三级 */
+    .entry ul ul ul {
+      padding-left: 1em;
+    }
+
+    .entry ul ul ul li:before {
+      content: '🌿';  /* 第三级用叶子 */
+      font-size: 0.9em;
+    }
+
+    /* 列表内容样式 */
+    .entry li {
+      line-height: 1.6;
+      color: #282c34;
+    }
+
+    .entry li > p {
+      margin: 5px 0;
+      display: inline;  /* 让段落和列表项在同一行 */
+    }
+
+    /* 列表项悬停效果 */
+    .entry li:hover:before {
+      transform: scale(1.2) rotate(15deg);
+    }
+
+    /* 有序列表样式 */
+    .entry ol {
+      list-style: none;
+      padding-left: 0.5rem;
+      margin: 0 0 20px 0;
+    }
+
+    .entry ol li {
+      position: relative;
+      padding-left: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    .entry ol li:before {
+      content: '🌲';  /* 第一级用松树 */
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-size: 0.95em;
+      transition: all 0.3s ease;
+    }
+
+    /* 二级有序列表 */
+    .entry ol ol {
+      padding-left: 1em;
+      margin: 10px 0;
+    }
+
+    .entry ol li li:before {
+      content: '🎋';  /* 第二级用竹子 */
+      font-size: 0.9em;
+      top: 3px;
+    }
+
+    /* 三级有序列表 */
+    .entry ol ol ol {
+      padding-left: 1em;
+      margin: 10px 0;
+    }
+
+    .entry ol li li li:before {
+      content: '🌺';  /* 第三级用兰花 */
+      font-size: 0.9em;
+    }
+
+    /* 有序列表和无序列表混合样式保持统一 */
+    .entry ol ul, 
+    .entry ul ol {
+      margin: 10px 0;
+      padding-left: 1em;
+    }
+
+    /* 所有列表项的通用悬停效果 */
+    .entry li:hover:before {
+      transform: scale(1.2) rotate(15deg);
+    }
+
+    .entry table {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      margin: 20px 0;
+      width: 100%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .entry table th,
+    .entry table td {
+      padding: 12px 16px;
+      border: 1px solid #E8F4EE;
+      transition: all 0.3s ease;
+    }
+
+    .entry table th {
+      background-color: #eff5f2;
+      color: #06621e;
+      font-weight: 600;
+      text-align: left;
+      border-bottom: 2px solid #2f845e;
+    }
+
+    .entry table tr:hover {
+      background-color: #f8fbf9;
+    }
+
+    .entry table td:hover {
+      background-color: #edf6f1;
+    }
+    
+    /* 段落样式 */
+    .entry p {
+      margin: 3px 0;
+      padding: 0;
+      word-spacing: 0.1rem;
+      line-height: 1.9rem;
+      text-align: left;
+    }
+
+    .entry p:not(:has(img)):hover {
+      background-color: transparent;  /* 移除悬停背景色 */
+      padding-left: 0;               /* 移除悬停padding变化 */
+      padding-right: 0;
+      border-radius: 0;
+    }
+    
+    /* 标题样式调整 */
+    .entry h1, .entry h2, .entry h3, .entry h4 {
+      margin: 1em 0 0.5em;  /* 减小上下边距 */
+      padding: 0;
+      font-weight: 600;
+      color: #2f845e;
+      text-align: left;
+    }
+
+    /* h1 特殊调整 */
+    .entry h1 {
+      margin-top: 1.2em;
+      margin-bottom: 0.6em;
+      font-size: 2.4rem;
+    }
+
+    /* h2 调整 */
+    .entry h2 {
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+      font-size: 2rem;
+    }
+
+    /* h3 调整 */
+    .entry h3 {
+      font-size: 1.8rem;
+      color: #2f845e;
+      position: relative;
+      padding-left: 1rem;
+      margin-top: 0.8em;    /* 减小顶部边距 */
+      margin-bottom: 0.4em; /* 减小底部边距 */
+    }
+
+    /* h4 调整 */
+    .entry h4 {
+      margin-top: 0.6em;
+      margin-bottom: 0.3em;
+      font-size: 1.5rem;
+    }
+
+    .entry h1:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(152, 251, 152, 0), #E8F4EE, rgba(152, 251, 152, 0));
+      transition: transform 0.4s ease;
+      transform: scaleX(0);
+      transform-origin: center;
+      z-index: -1;
+    }
+
+    .entry h1:hover {
+      transform: scale(1.1);
+    }
+
+    .entry h1:hover:before {
+      transform: scaleX(1);
+    }
+
+    .entry h2:after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2.5px;
+      margin: 0.5rem 0 0;
+      background: linear-gradient(90deg, rgba(106, 158, 69, 0), #3ea174, rgba(106, 158, 69, 0));
+      border-radius: 10px;
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .entry h2:hover:after {
+      transform: scaleX(1);
+    }
+    
+    .entry img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1em auto;
+      border-radius: 10px;
+      transition: transform 0.15s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .entry img:hover {
+      transform: scale(1.01);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .entry blockquote {
+      background: #eaf3ec;
+      border-left: 8px solid #2f845e;
+      padding: 0.5rem 1rem;
+      color: #3f8a5f;
+      margin: 15px 0;
+      border-radius: 7px;
+      transition: box-shadow 0.3s ease, border-radius 0.3s ease, border-left 0.3s ease;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .entry blockquote:hover {
+      border-left: 9px solid #2f845e;
+      box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.15);
+      border-radius: 15px;
+    }
+    
+    .entry code {
+      background-color: rgba(221, 235, 213, 0.5);
+      color: #359d09;
+      font-family: "Fira Code", Consolas, Monaco, monospace;
+      font-size: 1rem;
+      font-weight: 550;
+      padding: 3px 3px 1px;
+      border-radius: 7px;
+      transition: all 0.3s ease;
+    }
+
+    .entry code:hover {
+      background-color: rgba(221, 235, 213, 1);
+      font-weight: 700;
+      padding: 3px 3px 3px;
+    }
+    
+    .entry pre {
+      font-family: "Fira Code", Consolas, Monaco, monospace;
+      color: #2f4f4f;
+      background-color: #FFFFFF;
+      padding: 17px;
+      padding-top: 32px;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+      margin: 20px 0;
+      position: relative;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    
+    .entry pre::before {
+      background: #015e19;
+      border-radius: 50%;
+      box-shadow: 20px 0 #068f28, 40px 0 rgb(116, 219, 38);
+      content: ' ';
+      height: 12px;
+      width: 12px;
+      position: absolute;
+      left: 13px;
+      top: 12px;
+    }
+
+    .entry hr {
+      border: none;
+      border-top: 2px solid transparent;
+      background-image: linear-gradient(90deg, #5ea67c, #2f845e, #5ea67c);
+      height: 1.5px;
+      margin: 20px 0;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .entry hr:hover {
+      height: 2px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      transform: scaleX(1.02);
+    }
+
+    .entry mark {
+      font-weight: 500;
+      background-color: #aee6c3;
+      color: inherit;
+      margin: 0 2px;
+      padding: 3px 3px 2.5px;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .entry mark:hover {
+      background-color: #8ed4a8;
+      border-radius: 5px;
+      padding: 3px 6px;
+    }
+
+    /* 标题样式 */
+    .entry h3::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 4px;
+      background: #2f845e;
+      border-radius: 2px;
+    }
+
+    /* 移除标题悬停效果 */
+    .entry h3:hover {
+      padding-left: 1rem;  /* 保持原始padding */
+    }
+
+    .entry h3:hover::before {
+      width: 4px;         /* 保持原始宽度 */
+      background: #2f845e; /* 保持原始颜色 */
+    }
+
+    .entry h4::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      background: #3ea174;
+      transition: width 0.3s ease;
+    }
+
+    .entry h4:hover::after {
+      width: 100%;
+    }
+
+    .entry a {
+      color: #0c8f94;
+      text-decoration: none;
+      position: relative;
+      padding: 0 2px;
+      transition: all 0.3s ease;
+    }
+
+    .entry a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: #0c8f94;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+
+    .entry a:hover {
+      color: #02502a;
+    }
+
+    .entry a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .entry strong {
+      color: #06621e;
+      font-weight: 600;
+      padding: 0 2px;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .entry strong::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 0.3em;
+      background-color: rgba(62, 161, 116, 0.2);
+      z-index: -1;
+      transition: height 0.3s ease;
+    }
+
+    .entry strong:hover::before {
+      height: 100%;
+    }
+
+    .entry em {
+      font-style: italic;
+      color: #2f845e;
+      padding: 0 2px;
+      transition: all 0.3s ease;
+    }
+
+    .entry em:hover {
+      color: #3ea174;
+      letter-spacing: 0.5px;
+    }
+
+    /* 删除线样式 */
+    .entry del {
+      color: rgba(50, 100, 50, 0.5);
+      text-decoration: line-through;
+      text-decoration-color: rgba(76, 175, 80, 0.7);
+      text-decoration-thickness: 1.5px;
+      font-style: italic;
+      opacity: 0.8;
+      transition: color 0.3s ease, opacity 0.3s ease;
+    }
+
+    .entry del:hover {
+      color: rgba(50, 100, 50, 1);
+      opacity: 1;
+      text-decoration-color: rgba(76, 175, 80, 1);
+    }
+
+    /* 下划线样式 */
+    .entry u {
+      text-decoration: none;
+      border-bottom: 2px solid rgb(9, 156, 70);
+      padding-bottom: 2.5px;
+      transition: all 0.3s ease;
+    }
+
+    .entry u:hover {
+      border: 2px solid rgb(9, 156, 70);
+      padding: 4px;
+      margin: 0 4px;
+      border-radius: 7px;
+    }
+
+    /* 上标和下标 */
+    .entry sup, .entry sub {
+      color: #2f845e;
+      font-size: 0.75em;
+      transition: all 0.3s ease;
+    }
+
+    .entry sup:hover, .entry sub:hover {
+      color: #3ea174;
+      font-size: 0.85em;
+    }
+
+    /* 键盘输入 */
+    .entry kbd {
+      background-color: #f8f9fa;
+      border: 1px solid #2f845e;
+      border-radius: 3px;
+      box-shadow: 0 1px 1px rgba(0,0,0,.12);
+      color: #2f845e;
+      display: inline-block;
+      font-size: 0.85em;
+      line-height: 1;
+      padding: 2px 4px;
+      transition: all 0.3s ease;
+    }
+
+    .entry kbd:hover {
+      background-color: #2f845e;
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 2px rgba(0,0,0,.2);
+    }
+
+    /* 缩写 */
+    .entry abbr {
+      border-bottom: 1px dotted #2f845e;
+      cursor: help;
+      transition: all 0.3s ease;
+    }
+
+    .entry abbr:hover {
+      background-color: rgba(47, 132, 94, 0.1);
+      border-bottom: 1px solid #2f845e;
+    }
+
+    /* 定义列表 */
+    .entry dl {
+      margin: 1em 0;
+    }
+
+    .entry dt {
+      color: #2f845e;
+      font-weight: 600;
+      margin-top: 1em;
+      transition: all 0.3s ease;
+    }
+
+    .entry dt:hover {
+      padding-left: 0.5em;
+      color: #3ea174;
+    }
+
+    .entry dd {
+      margin-left: 2em;
+      color: #666;
+      transition: all 0.3s ease;
+    }
+
+    .entry dd:hover {
+      color: #333;
+      padding-left: 0.5em;
+    }
+
+    /* 小号文本 */
+    .entry small {
+      color: #666;
+      font-size: 0.85em;
+      transition: all 0.3s ease;
+    }
+
+    .entry small:hover {
+      color: #2f845e;
+      font-size: 0.9em;
+    }
+
+    /* 选中文本 */
+    .entry ::selection {
+      background-color: rgba(47, 132, 94, 0.2);
+      color: #2f845e;
+    }
+
+    /* 表单元素 */
+    .entry input[type="text"],
+    .entry input[type="email"],
+    .entry textarea {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .entry input[type="text"]:focus,
+    .entry input[type="email"]:focus,
+    .entry textarea:focus {
+      border-color: #2f845e;
+      box-shadow: 0 0 5px rgba(47, 132, 94, 0.2);
+      outline: none;
+    }
+
+    /* 按钮 */
+    .entry button {
+      background-color: #2f845e;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .entry button:hover {
+      background-color: #3ea174;
+      transform: translateY(-2px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    /* 文章容器样式 */
+    .posts {
+      padding: 0;
+      margin: 0;
+    }
