@@ -5,8 +5,9 @@
     {% include nav.html %}
 
     {% if page.toc==true %}
-      <aside class="toc">
-        {% include toc.html html=content %}
+     <aside class="toc">
+        <div class="toc-title">📚 文章导航</div>
+        {% include toc.html html=content sanitize=true h_min=2 h_max=4 class="toc-list" item_class="toc-item-%level%" skip_no_ids=true %}
       </aside>
     {% endif %}
 
