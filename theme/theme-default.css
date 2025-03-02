@@ -1,7 +1,6 @@
 
    /* 文章头部样式 */
 .posts {
-  max-width: 90%;
   margin: 0 auto;
   padding: 2rem 0;
 }
@@ -164,7 +163,6 @@
       padding: 0;
       color: #282c34;
       background: #fefefe;
-      max-width: 90%;
       margin: 0;
       text-align: left;
     }
