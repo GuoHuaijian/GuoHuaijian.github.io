@@ -26,12 +26,12 @@ favicon: https://raw.githubusercontent.com/FromEndWorld/LOFFER/master/images/fav
 navigation:
   - name: 🏠首页
     url: /
-  - name: 📸相册
-    url: /photos
   # - name: 分类
   #   url: /tags
   - name: 📚归档
     url: /archive
+  - name: 📸相册
+    url: /photos
   - name: 👨‍💻关于
     url: /about
 
