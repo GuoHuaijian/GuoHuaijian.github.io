@@ -83,9 +83,38 @@ layout: default
       </div>
 
       <div class="post-excerpt">
-          {%   if post.content contains site.excerpt_separator or post.content != post.excerpt %}{{ post.excerpt }}
-          {%   else %}{{ post.content | lstrip | split: "
-" | first }}{% endif %}
+        {% if post.content contains site.excerpt_separator or post.content != post.excerpt %}
+        {{ post.excerpt }}
+        {% else %}
+        {% assign content_without_html = post.content | strip_html %}
+        {% assign excerpt = content_without_html | lstrip | split: "\n" | first %}
+        {% assign excerpt = excerpt | truncate: 130 %}
+
+        {% assign stop_reading = false %}
+        {% assign final_excerpt = "" %}
+        {% assign char_count = 0 %}
+
+        {% for char in excerpt %}
+        {% if char_count >= 50 %}
+        {% if char == "<" %}
+        {% assign stop_reading = true %}
+        {% endif %}
+        {% endif %}
+
+        {% if stop_reading == false %}
+        {% assign final_excerpt = final_excerpt | append: char %}
+        {% assign char_count = char_count | plus: 1 %}
+        {% else %}
+        {% break %}
+        {% endif %}
+
+        {% if char_count >= 130 %}
+        {% break %}
+        {% endif %}
+        {% endfor %}
+
+        {{ final_excerpt | strip }}
+        {% endif %}
           <p>
             <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">Read More</a>
           </p>
@@ -116,59 +145,59 @@ layout: default
     margin: 0 auto;
     padding: 1.5rem;  /* 减小外边距 */
   }
-  
+
   .post {
     margin-bottom: 1.5rem;  /* 减小文章间距 */
     padding: 1.2rem;  /* 减小内边距 */
     background: rgba(255, 255, 255, 0.8);
     border-radius: 6px;  /* 稍微减小圆角 */
   }
-  
+
   .post h1 {
     margin: 0 0 0.8rem;  /* 减小标题下方间距 */
     font-size: 1.4rem;  /* 稍微减小标题大小 */
   }
-  
+
   .post .meta {
     margin-bottom: 0.8rem;  /* 减小元信息下方间距 */
     gap: 0.8rem;  /* 减小元素间距 */
   }
-  
+
   .post-excerpt {
     margin-top: 0.8rem;  /* 减小摘要上方间距 */
   }
-  
+
   .post-link {
     margin-top: 0.8rem;  /* 减小按钮上方间距 */
     padding: 0.4rem 0.8rem;  /* 减小按钮内边距 */
   }
-  
+
   .post:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 20px rgba(66, 185, 131, 0.1);
   }
-  
+
   .post.pinned {
     border-left: 4px solid #42b983;
     background: rgba(66, 185, 131, 0.03);
   }
-  
+
   .post h1 {
     margin: 0 0 1rem;
     font-size: 1.5rem;
     line-height: 1.4;
   }
-  
+
   .post h1 a {
     color: #2c3e50;
     text-decoration: none;
     transition: color 0.3s ease;
   }
-  
+
   .post h1 a:hover {
     color: #42b983;
   }
-  
+
   .post .meta {
     display: flex;
     align-items: center;
@@ -178,27 +207,27 @@ layout: default
     font-size: 0.9rem;
     color: #666;
   }
-  
+
   .post .author {
     display: inline-flex;
     align-items: center;
   }
-  
+
   .post .author::before {
     content: '👤';
     margin-right: 0.3rem;
   }
-  
+
   .post .date {
     display: inline-flex;
     align-items: center;
   }
-  
+
   .post .date::before {
     content: '📅';
     margin-right: 0.3rem;
   }
-  
+
   .post .tag {
     list-style: none;
     padding: 0;
@@ -207,7 +236,7 @@ layout: default
     gap: 0.5rem;
     flex-wrap: wrap;
   }
-  
+
   .post .tag li a {
     display: inline-block;
     padding: 0.2rem 0.6rem;
@@ -218,17 +247,17 @@ layout: default
     text-decoration: none;
     transition: all 0.3s ease;
   }
-  
+
   .post .tag li a:hover {
     background: #42b983;
     color: white;
   }
-  
+
   .post-excerpt {
     color: #666;
     line-height: 1.6;
   }
-  
+
   .post-link {
     display: inline-block;
     margin-top: 1rem;
@@ -240,12 +269,12 @@ layout: default
     font-size: 0.9rem;
     transition: all 0.3s ease;
   }
-  
+
   .post-link:hover {
     background: #42b983;
     color: white;
   }
-  
+
   .pagination {
     display: flex;
     justify-content: space-between;
@@ -253,7 +282,7 @@ layout: default
     max-width: 800px;
     padding: 0 2rem;
   }
-  
+
   .pagination a {
     padding: 0.5rem 1rem;
     color: #42b983;
@@ -262,21 +291,21 @@ layout: default
     border-radius: 20px;
     transition: all 0.3s ease;
   }
-  
+
   .pagination a:hover {
     background: #42b983;
     color: white;
   }
-  
+
   @media (max-width: 768px) {
     .posts {
       padding: 1rem;
     }
-    
+
     .post {
       padding: 1rem;
     }
-    
+
     .post .meta {
       flex-direction: column;
       align-items: flex-start;

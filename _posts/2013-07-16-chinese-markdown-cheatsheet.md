@@ -5,6 +5,7 @@ date: 2013-07-16
 Author: Shengbin 
 tags: [学习笔记, markdown]
 comments: true
+toc: true
 ---
 
 本中文版Markdown语法简介来自博客 <https://blog.shengbin.me/posts/markdown-syntax>
