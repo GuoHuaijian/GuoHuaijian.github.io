@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Redis 持久化机制：AOF日志与RDB快照详解
+title: Redis持久化机制：AOF日志与RDB快照详解
 date: 2025-02-24
 author: Guo
 tags: [学习笔记, Redis]
