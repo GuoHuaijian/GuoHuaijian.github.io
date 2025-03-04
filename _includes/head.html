@@ -25,11 +25,45 @@
     });
   </script>
 <script type="module">
-import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10.0.2/+esm';
-mermaid.initialize({ startOnLoad: false });
-await mermaid.run({
-  querySelector: '.language-mermaid',
-});
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#f8f9fa',           // 浅灰色背景
+        primaryTextColor: '#333333',       // 深灰色文字
+        primaryBorderColor: '#666666',     // 中灰色边框
+        lineColor: '#666666',              // 中灰色线条
+        secondaryColor: '#ffffff',         // 白色次要背景
+        tertiaryColor: '#ffffff',          // 白色第三背景
+        noteTextColor: '#333333'           // 注释文字颜色
+      },
+      fontFamily: 'JetBrains Mono',
+      fontSize: 14,
+      flowchart: {
+        curve: 'linear',
+        nodeSpacing: 60,
+        rankSpacing: 80,
+        padding: 15,
+        htmlLabels: true,
+        wrap: false,
+        labelBackground: '#ffffff',
+        defaultLinkColor: '#666666'
+      },
+      sequence: {
+        actorMargin: 100,
+        messageMargin: 50,
+        width: 200,
+        boxMargin: 20,
+        noteMargin: 15,
+        messageAlign: 'center',
+        mirrorActors: true,
+        bottomMarginAdj: 10,
+        useMaxWidth: true,
+        boxTextMargin: 10
+      }
+    });
+    await mermaid.run({querySelector:'code.language-mermaid'})
 </script>
 
   <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
