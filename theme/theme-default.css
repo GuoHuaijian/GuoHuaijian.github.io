@@ -450,8 +450,8 @@
     
     .entry code {
 /*       background-color: rgba(221, 235, 213, 0.5); */
-      color: #359d09;
-      font-family: "Fira Code", Consolas, Monaco, monospace;
+/*       color: #359d09;
+      font-family: "Fira Code", Consolas, Monaco, monospace; */
       font-size: 1rem;
       font-weight: 550;
       padding: 3px 3px 1px;
@@ -459,15 +459,15 @@
       transition: all 0.3s ease;
     }
 
-    .entry code:hover {
-/*       background-color: rgba(221, 235, 213, 1); */
+/*     .entry code:hover {
+      background-color: rgba(221, 235, 213, 1);
       font-weight: 700;
       padding: 3px 3px 3px;
-    }
+    } */
     
     .entry pre {
-      font-family: "Fira Code", Consolas, Monaco, monospace;
-      color: #2f4f4f;
+/*       font-family: "Fira Code", Consolas, Monaco, monospace;
+      color: #2f4f4f; */
       background-color: #FFFFFF;
       padding: 17px;
       padding-top: 32px;
