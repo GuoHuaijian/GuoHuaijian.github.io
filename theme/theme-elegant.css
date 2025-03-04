@@ -543,4 +543,16 @@
       width: auto;  /* 移除固定宽度 */
     }
   }
+  /* Mermaid 图表样式 */
+.language-mermaid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.language-mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
   }
