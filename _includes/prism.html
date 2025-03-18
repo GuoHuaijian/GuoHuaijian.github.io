@@ -1,0 +1,169 @@
+<!-- 使用GitHub风格的优质灰色主题 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-okaidia.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+<!-- 添加行号插件 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+
+<!-- 支持常用语言高亮 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-ruby.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-go.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+
+
+<style>
+  /* 基础代码块样式 */
+  pre[class*="language-"] {
+    background: #282c34;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1em;
+    margin: 1em 0;
+    overflow: auto;
+    position: relative;
+  }
+
+  /* Mermaid 图表专用背景颜色 */
+  pre.language-mermaid {
+    background: #f8f8f8;  /* 浅灰色背景 */
+    border-color: #e0e0e0;
+  }
+  
+  /* Mermaid 图表标签样式调整 */
+  pre.language-mermaid::before {
+    background: #e0e0e0;
+    color: #333;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  /* 代码字体和大小 */
+  code[class*="language-"] {
+    font-family: "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+  
+  /* 语言标识 - 左侧 - 优化深色主题样式 */
+  pre[class*="language-"]::before {
+    content: attr(data-language);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #e6efee; 
+    font-size: 0.7em;
+    background: #1e222a;
+    padding: 0.2em 0.6em;
+    border-radius: 0 0 4px 0;
+    font-family: "JetBrains Mono", monospace;
+    text-transform: lowercase;
+    letter-spacing: 0.5px;
+    border-right: 1px solid #3a3f4b;
+    border-bottom: 1px solid #3a3f4b;
+    opacity: 0.9;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+
+  /* 行号样式优化 */
+  .line-numbers .line-numbers-rows {
+    border-right: 1px solid #ddd;
+    padding-right: 0.3em;
+  }
+  
+  /* 使用DIV而非按钮实现复制功能 */
+  .code-copy-icon {
+    position: absolute;
+    right: 0.5em;
+    top: 0.5em;
+    background: rgba(0,0,0,0.1);
+    border-radius: 3px;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* 确保SVG图标为灰色 */
+  .code-copy-icon svg {
+    width: 16px;
+    height: 16px;
+    stroke: #555;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+  
+  pre[class*="language-"]:hover .code-copy-icon {
+    opacity: 1;
+  }
+  
+  .code-copy-icon:hover {
+    background: rgba(0,0,0,0.2);
+    transform: scale(1.05);
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // 处理所有代码块（包括普通代码块和mermaid图表）
+  document.querySelectorAll('pre[class*="language-"]').forEach(function(block) {
+    // 提取语言
+    const classes = block.className.split(' ');
+    const languageClass = classes.find(c => c.startsWith('language-'));
+    const language = languageClass ? languageClass.replace('language-', '') : 'code';
+    
+    // 设置语言属性
+    block.setAttribute('data-language', language);
+
+    // 只为非mermaid代码块添加行号
+    if (!block.classList.contains('language-mermaid')) {
+      block.classList.add('line-numbers');
+    }
+    
+    // 创建复制图标
+    const copyIcon = document.createElement('div');
+    copyIcon.className = 'code-copy-icon';
+    copyIcon.innerHTML = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+    
+    // 添加复制功能
+    copyIcon.addEventListener('click', function() {
+      const code = block.querySelector('code');
+      if (code) {
+        navigator.clipboard.writeText(code.textContent).then(function() {
+          // 显示复制成功图标
+          copyIcon.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+          
+          // 2秒后恢复原图标
+          setTimeout(function() {
+            copyIcon.innerHTML = '<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>';
+          }, 2000);
+        });
+      }
+    });
+    
+    // 添加图标到代码块
+    block.appendChild(copyIcon);
+  });
+
+  // 确保Prism重新处理所有代码块以应用行号
+  if (Prism.plugins.lineNumbers) {
+    Prism.highlightAll();
+  }
+});
+</script>
