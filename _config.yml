@@ -42,7 +42,7 @@ paginate: 4
 excerpt_separator: <!-- more -->
 
 # 你的社交网络链接，它们会作为图标出现在你的网站页脚中，可选填写
-footer-links: 
+footer-links:
   weibo: weibo.com #请输入你的微博个性域名 https://www.weibo.com/<thispart>
   behance: # https://www.behance.net/<>
   dribbble: # https://dribbble.com/<>
@@ -56,7 +56,7 @@ footer-links:
   rss: #随便填点啥RSS就能用了
   stackoverflow: # http://stackoverflow.com/<>
   tumblr: # https://<username>.tumblr.com
-  twitter: # https://www.twitter.com/<your_twitter_username> 
+  twitter: # https://www.twitter.com/<your_twitter_username>
   youtube: # channel/<your_long_string> or user/<user-name>
 
 # 站点页脚的文字
@@ -71,7 +71,7 @@ disqus:  #shortname
 gitalk:
   clientID: 23c2dc3bdd26fb236b7a
   clientSecret: 739d15b447a4dadcf6a3366859fbad9a560673d3
-  repo: GuoHuaijian.github.io 
+  repo: GuoHuaijian.github.io
   owner: GuoHuaijian
 
 # 输入Google Analytics web tracking code
@@ -124,9 +124,6 @@ exclude:
   - README.md
   - CNAME
 
-include:
-  - app/sparkmates/_next  # Next.js项目位于app目录
-  
 # 相册配置
 albums:
   travel:
