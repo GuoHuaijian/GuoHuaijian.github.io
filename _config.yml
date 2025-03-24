@@ -124,6 +124,9 @@ exclude:
   - README.md
   - CNAME
 
+include:
+  - app/sparkmates/_next  # Next.js项目位于app目录
+  
 # 相册配置
 albums:
   travel:
