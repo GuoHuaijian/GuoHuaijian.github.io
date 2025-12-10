@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Authors on N9O</title><link>https://guohuaijian.github.io/myblog/authors/</link><description>Recent content in Authors on N9O</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© 2025 Nuno Coração</copyright><lastBuildDate>Thu, 22 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://guohuaijian.github.io/myblog/authors/index.xml" rel="self" type="application/rss+xml"/><item><title>David Simão</title><link>https://guohuaijian.github.io/myblog/authors/davidsimao/</link><pubDate>Thu, 22 Dec 2022 00:00:00 +0000</pubDate><guid>https://guohuaijian.github.io/myblog/authors/davidsimao/</guid><description>&lt;div class="flex mt-4"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Authors on N9O</title><link>/app/myblog/authors/</link><description>Recent content in Authors on N9O</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© 2025 Nuno Coração</copyright><lastBuildDate>Thu, 22 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="/app/myblog/authors/index.xml" rel="self" type="application/rss+xml"/><item><title>David Simão</title><link>/app/myblog/authors/davidsimao/</link><pubDate>Thu, 22 Dec 2022 00:00:00 +0000</pubDate><guid>/app/myblog/authors/davidsimao/</guid><description>&lt;div class="flex mt-4"&gt;
 &lt;img class="!mt-0 !mb-0 h-24 w-24 rounded-full ltr:mr-4 rtl:ml-4" width="96" height="96"
 src="avatar.jpeg" /&gt;
 &lt;div class="place-self-center"&gt;
@@ -20,7 +20,7 @@ aria-label="{{ $name | title }}" rel="me noopener noreferrer"&gt;&lt;span class=
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>Nuno Coração</title><link>https://guohuaijian.github.io/myblog/authors/nunocoracao/</link><pubDate>Thu, 22 Dec 2022 00:00:00 +0000</pubDate><guid>https://guohuaijian.github.io/myblog/authors/nunocoracao/</guid><description>&lt;div class="flex mt-4"&gt;
+&lt;/div&gt;</description></item><item><title>Nuno Coração</title><link>/app/myblog/authors/nunocoracao/</link><pubDate>Thu, 22 Dec 2022 00:00:00 +0000</pubDate><guid>/app/myblog/authors/nunocoracao/</guid><description>&lt;div class="flex mt-4"&gt;
 &lt;img class="!mt-0 !mb-0 h-24 w-24 rounded-full ltr:mr-4 rtl:ml-4" width="96" height="96"
 src="avatar.jpg" /&gt;
 &lt;div class="place-self-center"&gt;
@@ -44,7 +44,7 @@ aria-label="{{ $name | title }}" rel="me noopener noreferrer"&gt;&lt;span class=
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description></item><item><title>Art by a Ghost</title><link>https://guohuaijian.github.io/myblog/authors/artbyaghost/</link><pubDate>Sun, 30 Oct 2022 00:00:00 +0000</pubDate><guid>https://guohuaijian.github.io/myblog/authors/artbyaghost/</guid><description>&lt;div class="flex mt-4"&gt;
+&lt;/div&gt;</description></item><item><title>Art by a Ghost</title><link>/app/myblog/authors/artbyaghost/</link><pubDate>Sun, 30 Oct 2022 00:00:00 +0000</pubDate><guid>/app/myblog/authors/artbyaghost/</guid><description>&lt;div class="flex mt-4"&gt;
 &lt;img class="!mt-0 !mb-0 h-24 w-24 rounded-full ltr:mr-4 rtl:ml-4" width="96" height="96"
 src="avatar.png" /&gt;
 &lt;div class="place-self-center"&gt;
